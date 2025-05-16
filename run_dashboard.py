@@ -46,7 +46,13 @@ def main():
         "--server.address=localhost"
     ]
     
-    streamlit.web.bootstrap.run()
+    # Use the current Streamlit API correctly
+    streamlit.web.bootstrap.run(
+        main_script_path=dashboard_path,
+        args=[],
+        flag_options={},
+        is_hello=False
+    )
 
 if __name__ == "__main__":
     main()
