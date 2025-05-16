@@ -1,0 +1,708 @@
+HitCraft AI Analytics Engine Architecture
+Project Structure Overview
+hitcraft-analytics/
+├── api/                      # API layer for external communication
+├── config/                   # Configuration files
+├── core/                     # Core analysis engine
+├── data/                     # Data handling and storage
+├── insights/                 # Insight generation components
+├── services/                 # External service integrations
+├── ui/                       # User interface components
+├── utils/                    # Utility functions and helpers
+├── workers/                  # Background processing workers
+└── scripts/                  # Deployment and maintenance scripts
+Detailed File Structure
+1. API Layer (/api)
+api/
+├── controllers/              # API endpoint controllers
+│   ├── auth_controller.py            # Authentication and authorization
+│   ├── insights_controller.py        # Insights retrieval endpoints
+│   ├── metrics_controller.py         # Metrics and KPIs endpoints
+│   └── admin_controller.py           # Admin functionality endpoints
+├── middleware/               # Request/response middleware
+│   ├── auth_middleware.py            # Authentication middleware
+│   ├── logging_middleware.py         # Request logging middleware
+│   └── error_middleware.py           # Error handling middleware
+├── routes/                   # API route definitions
+│   ├── auth_routes.py                # Authentication routes
+│   ├── insights_routes.py            # Insights routes
+│   ├── metrics_routes.py             # Metrics routes
+│   └── admin_routes.py               # Admin routes
+├── schemas/                  # Request/response validation
+│   ├── auth_schemas.py               # Authentication schemas
+│   ├── insights_schemas.py           # Insights schemas
+│   ├── metrics_schemas.py            # Metrics schemas
+│   └── admin_schemas.py              # Admin functionality schemas
+├── server.py                 # API server entry point
+└── swagger.json              # API documentation
+File Descriptions:
+
+api/controllers/auth_controller.py: Handles user authentication and authorization requests
+api/controllers/insights_controller.py: Processes requests for insight data and recommendations
+api/controllers/metrics_controller.py: Serves metrics and KPI data to the UI
+api/controllers/admin_controller.py: Manages admin-specific functionality like user management
+api/middleware/auth_middleware.py: Validates tokens and enforces access permissions
+api/middleware/logging_middleware.py: Logs API requests and responses for monitoring
+api/middleware/error_middleware.py: Catches and formats errors for consistent response handling
+api/routes/auth_routes.py: Defines authentication endpoints and maps them to controllers
+api/routes/insights_routes.py: Routes for accessing AI-generated insights
+api/routes/metrics_routes.py: Routes for accessing analytics metrics and KPIs
+api/routes/admin_routes.py: Routes for administration functionality
+api/schemas/auth_schemas.py: Validates authentication request/response formats
+api/schemas/insights_schemas.py: Validates insight request/response formats
+api/schemas/metrics_schemas.py: Validates metrics request/response formats
+api/schemas/admin_schemas.py: Validates admin functionality request/response formats
+api/server.py: Initializes and configures the API server, middleware, and routes
+api/swagger.json: OpenAPI documentation for all endpoints
+
+2. Configuration (/config)
+config/
+├── app_config.py             # Main application configuration
+├── db_config.py              # Database connection configuration
+├── logging_config.py         # Logging configuration
+├── mixpanel_config.py        # Mixpanel API connection settings
+├── email_config.py           # Email notification settings
+├── ai_config.py              # AI/ML model configurations
+├── schedule_config.py        # Scheduled tasks configuration
+└── defaults/                 # Default configuration files
+    ├── metrics_defaults.json         # Default metrics configuration
+    ├── insights_defaults.json        # Default insights configuration
+    └── report_defaults.json          # Default report templates
+File Descriptions:
+
+config/app_config.py: Central configuration for the application including environment settings
+config/db_config.py: Database connection parameters, pooling settings, and credentials
+config/logging_config.py: Logging levels, formats, and destinations
+config/mixpanel_config.py: Mixpanel API tokens, endpoint URLs, and authentication details
+config/email_config.py: SMTP server settings, templates, and notification rules
+config/ai_config.py: Model parameters, thresholds, and settings for AI components
+config/schedule_config.py: Timing for data pulls, analysis runs, and report generation
+config/defaults/metrics_defaults.json: Default metrics to track and their visualization settings
+config/defaults/insights_defaults.json: Default insight types and their thresholds
+config/defaults/report_defaults.json: Default report formats and content templates
+
+3. Core Analysis Engine (/core)
+core/
+├── analysis/                 # Analysis algorithms
+│   ├── anomaly_detection.py          # Anomaly detection algorithms
+│   ├── cohort_analysis.py            # Cohort analysis functionality
+│   ├── correlation_analysis.py       # Metric correlation detection
+│   ├── funnel_analysis.py            # Conversion funnel analysis
+│   ├── retention_analysis.py         # User retention analysis
+│   ├── segmentation.py               # User segmentation algorithms
+│   └── trend_detection.py            # Trend identification algorithms
+├── prediction/               # Predictive models
+│   ├── churn_prediction.py           # User churn prediction
+│   ├── conversion_prediction.py      # Conversion likelihood prediction
+│   ├── growth_prediction.py          # User growth forecasting
+│   └── value_prediction.py           # User value prediction
+├── metrics/                  # Metric calculations
+│   ├── engagement_metrics.py         # User engagement metrics
+│   ├── funnel_metrics.py             # Funnel performance metrics
+│   ├── growth_metrics.py             # Growth and acquisition metrics
+│   ├── production_metrics.py         # Content production metrics
+│   └── satisfaction_metrics.py       # User satisfaction metrics
+├── models/                   # ML model definitions
+│   ├── clustering_models.py          # User clustering models
+│   ├── time_series_models.py         # Time series forecasting models
+│   ├── classification_models.py      # Classification models
+│   └── model_registry.py             # Model management and versioning
+├── pipelines/                # Analysis pipelines
+│   ├── daily_analysis.py             # Daily analysis pipeline
+│   ├── weekly_analysis.py            # Weekly analysis pipeline
+│   ├── monthly_analysis.py           # Monthly analysis pipeline
+│   └── ad_hoc_analysis.py            # Custom analysis pipeline
+└── engine.py                 # Main analysis engine orchestrator
+File Descriptions:
+
+core/analysis/anomaly_detection.py: Algorithms for detecting unusual patterns in metrics
+core/analysis/cohort_analysis.py: Tracks behavior of user groups over time
+core/analysis/correlation_analysis.py: Identifies relationships between different metrics
+core/analysis/funnel_analysis.py: Analyzes conversion paths through the product
+core/analysis/retention_analysis.py: Measures and predicts user retention over time
+core/analysis/segmentation.py: Algorithms for grouping users by behavior and traits
+core/analysis/trend_detection.py: Identifies significant trends in time-series data
+core/prediction/churn_prediction.py: Models that predict likelihood of user churn
+core/prediction/conversion_prediction.py: Predicts user conversion through funnels
+core/prediction/growth_prediction.py: Forecasts user growth based on historical patterns
+core/prediction/value_prediction.py: Predicts potential value of users and segments
+core/metrics/engagement_metrics.py: Calculates user engagement KPIs
+core/metrics/funnel_metrics.py: Calculates conversion rates and funnel effectiveness
+core/metrics/growth_metrics.py: Calculates user acquisition and growth metrics
+core/metrics/production_metrics.py: Calculates content creation and usage metrics
+core/metrics/satisfaction_metrics.py: Calculates user satisfaction and feedback metrics
+core/models/clustering_models.py: ML models for behavioral clustering
+core/models/time_series_models.py: Forecasting models for time-series data
+core/models/classification_models.py: Classification models for user behavior prediction
+core/models/model_registry.py: Manages model versions and deployment
+core/pipelines/daily_analysis.py: Orchestrates daily metrics and insights generation
+core/pipelines/weekly_analysis.py: Performs deeper weekly analysis and reporting
+core/pipelines/monthly_analysis.py: Performs comprehensive monthly analysis
+core/pipelines/ad_hoc_analysis.py: Handles custom analysis requests
+core/engine.py: Main orchestrator for all analysis processes
+
+4. Data Layer (/data)
+data/
+├── connectors/               # External data source connectors
+│   ├── mixpanel_connector.py         # Mixpanel API client
+│   ├── database_connector.py         # Internal database connector
+│   └── anthropic_connector.py        # Anthropic API connector
+├── processing/               # Data processing components
+│   ├── data_cleaning.py              # Data cleaning utilities
+│   ├── data_transformation.py        # Data transformation utilities
+│   ├── feature_engineering.py        # Feature creation for ML models
+│   └── event_processing.py           # Event stream processing
+├── storage/                  # Data storage management
+│   ├── db_manager.py                 # Database operations manager
+│   ├── cache_manager.py              # Caching layer manager
+│   ├── time_series_store.py          # Time-series data storage
+│   └── model_store.py                # ML model storage
+├── schemas/                  # Data schemas
+│   ├── event_schemas.py              # Event data schemas
+│   ├── metric_schemas.py             # Metric data schemas
+│   ├── user_schemas.py               # User data schemas
+│   └── insight_schemas.py            # Insight data schemas
+├── queries/                  # Database queries
+│   ├── metrics_queries.py            # Metrics data queries
+│   ├── users_queries.py              # User data queries
+│   ├── events_queries.py             # Event data queries
+│   └── insights_queries.py           # Insights data queries
+└── repositories/             # Data access layer
+    ├── metrics_repository.py         # Metrics data access
+    ├── users_repository.py           # User data access
+    ├── events_repository.py          # Event data access
+    └── insights_repository.py        # Insights data access
+File Descriptions:
+
+data/connectors/mixpanel_connector.py: Handles communication with Mixpanel API
+data/connectors/database_connector.py: Manages connections to internal database
+data/connectors/anthropic_connector.py: Interfaces with Anthropic API for insights
+data/processing/data_cleaning.py: Cleans raw data from external sources
+data/processing/data_transformation.py: Transforms data for analysis
+data/processing/feature_engineering.py: Creates features for ML models
+data/processing/event_processing.py: Processes raw event streams
+data/storage/db_manager.py: Manages database connections and operations
+data/storage/cache_manager.py: Handles data caching for performance
+data/storage/time_series_store.py: Specialized storage for time-series data
+data/storage/model_store.py: Stores and retrieves ML models
+data/schemas/event_schemas.py: Defines structure for event data
+data/schemas/metric_schemas.py: Defines structure for metric data
+data/schemas/user_schemas.py: Defines structure for user data
+data/schemas/insight_schemas.py: Defines structure for insight data
+data/queries/metrics_queries.py: SQL queries for metrics data
+data/queries/users_queries.py: SQL queries for user data
+data/queries/events_queries.py: SQL queries for event data
+data/queries/insights_queries.py: SQL queries for insights data
+data/repositories/metrics_repository.py: Repository pattern for metrics data
+data/repositories/users_repository.py: Repository pattern for user data
+data/repositories/events_repository.py: Repository pattern for event data
+data/repositories/insights_repository.py: Repository pattern for insights data
+
+5. Insights Generation (/insights)
+insights/
+├── generators/               # Insight generators
+│   ├── opportunity_generator.py      # Identifies growth opportunities
+│   ├── risk_generator.py             # Identifies potential risks
+│   ├── success_generator.py          # Identifies successful features/strategies
+│   └── anomaly_generator.py          # Generates insights from anomalies
+├── processors/               # Insight processors
+│   ├── insight_prioritizer.py        # Prioritizes insights by impact
+│   ├── insight_aggregator.py         # Combines related insights
+│   ├── insight_validator.py          # Validates insight quality
+│   └── insight_enricher.py           # Enriches insights with context
+├── recommendations/          # Recommendation generators
+│   ├── marketing_recommendations.py  # Marketing action recommendations
+│   ├── product_recommendations.py    # Product improvement recommendations
+│   ├── content_recommendations.py    # Content strategy recommendations
+│   └── test_recommendations.py       # A/B test recommendations
+├── nlg/                      # Natural language generation
+│   ├── insight_formatter.py          # Formats insights as natural language
+│   ├── report_generator.py           # Generates natural language reports
+│   ├── template_manager.py           # Manages text templates
+│   └── language_utils.py             # NLG utility functions
+└── insights_engine.py        # Main insights orchestrator
+File Descriptions:
+
+insights/generators/opportunity_generator.py: Identifies growth and improvement opportunities
+insights/generators/risk_generator.py: Identifies retention risks and problem areas
+insights/generators/success_generator.py: Identifies successful features and strategies
+insights/generators/anomaly_generator.py: Generates insights from detected anomalies
+insights/processors/insight_prioritizer.py: Ranks insights by business impact
+insights/processors/insight_aggregator.py: Groups related insights together
+insights/processors/insight_validator.py: Validates insight quality and relevance
+insights/processors/insight_enricher.py: Adds context and supporting data to insights
+insights/recommendations/marketing_recommendations.py: Generates marketing campaign ideas
+insights/recommendations/product_recommendations.py: Suggests product improvements
+insights/recommendations/content_recommendations.py: Recommends content strategy
+insights/recommendations/test_recommendations.py: Suggests A/B tests to validate hypotheses
+insights/nlg/insight_formatter.py: Converts insights to natural language
+insights/nlg/report_generator.py: Creates formatted reports with insights
+insights/nlg/template_manager.py: Manages text templates for various insight types
+insights/nlg/language_utils.py: NLG helper functions
+insights/insights_engine.py: Orchestrates insight generation, processing, and delivery
+
+6. External Services (/services)
+services/
+├── email/                    # Email service
+│   ├── email_sender.py               # Email delivery service
+│   ├── template_renderer.py          # Email template rendering
+│   └── email_scheduler.py            # Scheduled email service
+├── notification/             # Notification services
+│   ├── slack_notifier.py             # Slack integration
+│   ├── webhook_notifier.py           # Generic webhook notifier
+│   └── notification_manager.py       # Notification orchestration
+├── external_api/             # External API services
+│   ├── openai_service.py             # OpenAI API service
+│   ├── anthropic_service.py          # Anthropic API service
+│   └── api_manager.py                # API service orchestration
+└── authentication/           # Authentication services
+    ├── jwt_service.py                # JWT token service
+    ├── oauth_service.py              # OAuth integration
+    └── user_service.py               # User management service
+File Descriptions:
+
+services/email/email_sender.py: Sends emails via SMTP
+services/email/template_renderer.py: Renders HTML email templates
+services/email/email_scheduler.py: Schedules recurring email reports
+services/notification/slack_notifier.py: Sends notifications to Slack
+services/notification/webhook_notifier.py: Sends notifications to webhooks
+services/notification/notification_manager.py: Manages notification delivery
+services/external_api/openai_service.py: Interfaces with OpenAI APIs
+services/external_api/anthropic_service.py: Interfaces with Anthropic APIs
+services/external_api/api_manager.py: Manages external API usage
+services/authentication/jwt_service.py: Handles JWT token generation and validation
+services/authentication/oauth_service.py: Manages OAuth authentication
+services/authentication/user_service.py: Handles user management operations
+
+7. User Interface (/ui)
+ui/
+├── dashboard/                # Dashboard components
+│   ├── overview/                     # Overview dashboard
+│   │   ├── kpi_cards.jsx                     # KPI summary cards
+│   │   ├── trend_charts.jsx                  # Trend visualization
+│   │   └── insights_panel.jsx                # Insights display panel
+│   ├── funnels/                      # Funnel analysis dashboard
+│   │   ├── funnel_visualization.jsx          # Funnel visualization
+│   │   ├── conversion_charts.jsx             # Conversion rate charts
+│   │   └── drop_off_analysis.jsx             # Drop-off point analysis
+│   ├── users/                        # User analytics dashboard
+│   │   ├── segment_analysis.jsx              # User segment analysis
+│   │   ├── retention_charts.jsx              # Retention visualization
+│   │   └── cohort_analysis.jsx               # Cohort analysis view
+│   └── content/                      # Content analytics dashboard
+│       ├── prompt_analysis.jsx               # Prompt effectiveness analysis
+│       ├── quality_metrics.jsx               # Content quality metrics
+│       └── usage_metrics.jsx                 # Content usage metrics
+├── reports/                  # Report components
+│   ├── daily_report.jsx              # Daily report template
+│   ├── weekly_report.jsx             # Weekly report template
+│   ├── monthly_report.jsx            # Monthly report template
+│   └── report_generator.jsx          # Custom report builder
+├── shared/                   # Shared UI components
+│   ├── charts/                       # Chart components
+│   │   ├── bar_chart.jsx                     # Bar chart component
+│   │   ├── line_chart.jsx                    # Line chart component
+│   │   ├── pie_chart.jsx                     # Pie chart component
+│   │   └── funnel_chart.jsx                  # Funnel chart component
+│   ├── layout/                       # Layout components
+│   │   ├── header.jsx                        # Header component
+│   │   ├── sidebar.jsx                       # Sidebar navigation
+│   │   ├── footer.jsx                        # Footer component
+│   │   └── page_layout.jsx                   # Page layout wrapper
+│   ├── widgets/                      # UI widgets
+│   │   ├── date_picker.jsx                   # Date range picker
+│   │   ├── filter_panel.jsx                  # Data filtering panel
+│   │   ├── data_table.jsx                    # Data table component
+│   │   └── insight_card.jsx                  # Insight display card
+│   └── utils/                        # UI utilities
+│       ├── chart_utils.js                    # Chart helper functions
+│       ├── date_utils.js                     # Date formatting utilities
+│       ├── number_utils.js                   # Number formatting utilities
+│       └── color_utils.js                    # Color scheme utilities
+├── pages/                    # Page components
+│   ├── dashboard_page.jsx            # Main dashboard page
+│   ├── reports_page.jsx              # Reports page
+│   ├── settings_page.jsx             # Settings page
+│   ├── admin_page.jsx                # Admin dashboard
+│   └── login_page.jsx                # Authentication page
+├── hooks/                    # React hooks
+│   ├── use_analytics.js              # Analytics data hooks
+│   ├── use_insights.js               # Insights data hooks
+│   ├── use_auth.js                   # Authentication hooks
+│   └── use_api.js                    # API communication hooks
+├── context/                  # React context
+│   ├── analytics_context.js          # Analytics data context
+│   ├── insights_context.js           # Insights data context
+│   ├── auth_context.js               # Authentication context
+│   └── app_context.js                # Application state context
+├── styles/                   # Styling
+│   ├── tailwind.config.js            # Tailwind CSS configuration
+│   ├── global.css                    # Global styles
+│   └── theme.js                      # Theme configuration
+└── app.jsx                   # Main React application component
+File Descriptions:
+
+ui/dashboard/overview/kpi_cards.jsx: Displays key performance indicators
+ui/dashboard/overview/trend_charts.jsx: Visualizes metric trends over time
+ui/dashboard/overview/insights_panel.jsx: Displays AI-generated insights
+ui/dashboard/funnels/funnel_visualization.jsx: Visualizes conversion funnels
+ui/dashboard/funnels/conversion_charts.jsx: Shows conversion rate metrics
+ui/dashboard/funnels/drop_off_analysis.jsx: Analyzes where users drop off
+ui/dashboard/users/segment_analysis.jsx: Analyzes user segments
+ui/dashboard/users/retention_charts.jsx: Visualizes user retention
+ui/dashboard/users/cohort_analysis.jsx: Displays cohort analysis
+ui/dashboard/content/prompt_analysis.jsx: Analyzes prompt effectiveness
+ui/dashboard/content/quality_metrics.jsx: Shows content quality metrics
+ui/dashboard/content/usage_metrics.jsx: Displays content usage statistics
+ui/reports/daily_report.jsx: Daily analytics report template
+ui/reports/weekly_report.jsx: Weekly analytics report template
+ui/reports/monthly_report.jsx: Monthly analytics report template
+ui/reports/report_generator.jsx: Custom report builder
+ui/shared/charts/*: Reusable chart components for data visualization
+ui/shared/layout/*: Layout components for consistent UI structure
+ui/shared/widgets/*: Reusable UI widget components
+ui/shared/utils/*: Utility functions for UI components
+ui/pages/*: Full page components for different application sections
+ui/hooks/*: Custom React hooks for data access and functionality
+ui/context/*: React context providers for state management
+ui/styles/*: Styling configuration and theme definitions
+ui/app.jsx: Main React application entry point
+
+8. Utilities (/utils)
+utils/
+├── logging/                  # Logging utilities
+│   ├── logger.py                     # Logger configuration
+│   ├── log_formatter.py              # Log formatting utilities
+│   └── log_context.py                # Contextual logging helpers
+├── date/                     # Date manipulation utilities
+│   ├── date_formatter.py             # Date formatting utilities
+│   ├── date_calculator.py            # Date calculation helpers
+│   └── timezone_utils.py             # Timezone handling utilities
+├── math/                     # Mathematical utilities
+│   ├── statistics.py                 # Statistical helper functions
+│   ├── significance.py               # Statistical significance tests
+│   └── normalization.py              # Data normalization utilities
+├── text/                     # Text processing utilities
+│   ├── text_formatter.py             # Text formatting utilities
+│   ├── text_sanitizer.py             # Text sanitization utilities
+│   └── language_detector.py          # Language detection utilities
+├── security/                 # Security utilities
+│   ├── encryption.py                 # Data encryption utilities
+│   ├── hashing.py                    # Secure hashing functions
+│   └── token_utils.py                # Security token utilities
+└── validation/               # Data validation utilities
+    ├── input_validator.py            # Input validation utilities
+    ├── schema_validator.py           # Schema validation utilities
+    └── type_checker.py               # Type checking utilities
+File Descriptions:
+
+utils/logging/logger.py: Configures logging for the application
+utils/logging/log_formatter.py: Formats log entries consistently
+utils/logging/log_context.py: Adds context to log entries
+utils/date/date_formatter.py: Formats dates for display and storage
+utils/date/date_calculator.py: Calculates date ranges and differences
+utils/date/timezone_utils.py: Handles timezone conversions
+utils/math/statistics.py: Performs statistical calculations
+utils/math/significance.py: Determines statistical significance of changes
+utils/math/normalization.py: Normalizes data for comparison
+utils/text/text_formatter.py: Formats text for display
+utils/text/text_sanitizer.py: Sanitizes text inputs
+utils/text/language_detector.py: Detects language of text input
+utils/security/encryption.py: Encrypts sensitive data
+utils/security/hashing.py: Creates secure hashes
+utils/security/token_utils.py: Manages security tokens
+utils/validation/input_validator.py: Validates user inputs
+utils/validation/schema_validator.py: Validates data against schemas
+utils/validation/type_checker.py: Checks data types for consistency
+
+9. Workers (/workers)
+workers/
+├── scheduler/                # Scheduler components
+│   ├── task_scheduler.py             # Task scheduling service
+│   ├── cron_manager.py               # Cron job manager
+│   └── schedule_registry.py          # Schedule configuration registry
+├── queue/                    # Queue management
+│   ├── task_queue.py                 # Task queue manager
+│   ├── queue_consumer.py             # Queue consumer service
+│   └── queue_producer.py             # Queue producer utilities
+├── jobs/                     # Worker job definitions
+│   ├── data_import_job.py            # Data import job
+│   ├── analysis_job.py               # Analysis execution job
+│   ├── report_job.py                 # Report generation job
+│   ├── notification_job.py           # Notification sending job
+│   └── cleanup_job.py                # Cleanup tasks job
+├── manager/                  # Worker management
+│   ├── worker_manager.py             # Worker process manager
+│   ├── health_monitor.py             # Worker health monitoring
+│   └── scaling_manager.py            # Worker scaling manager
+└── worker.py                 # Main worker entry point
+File Descriptions:
+
+workers/scheduler/task_scheduler.py: Schedules tasks for execution
+workers/scheduler/cron_manager.py: Manages scheduled cron jobs
+workers/scheduler/schedule_registry.py: Stores schedule configurations
+workers/queue/task_queue.py: Manages task queues
+workers/queue/queue_consumer.py: Consumes tasks from queues
+workers/queue/queue_producer.py: Produces tasks for queues
+workers/jobs/data_import_job.py: Imports data from external sources
+workers/jobs/analysis_job.py: Runs analysis pipelines
+workers/jobs/report_job.py: Generates and sends reports
+workers/jobs/notification_job.py: Sends notifications
+workers/jobs/cleanup_job.py: Performs maintenance and cleanup
+workers/manager/worker_manager.py: Manages worker processes
+workers/manager/health_monitor.py: Monitors worker health
+workers/manager/scaling_manager.py: Scales workers based on load
+workers/worker.py: Main worker process entry point
+
+10. Scripts (/scripts)
+scripts/
+├── deployment/               # Deployment scripts
+│   ├── deploy.sh                     # Main deployment script
+│   ├── rollback.sh                   # Deployment rollback script
+│   └── healthcheck.sh                # Deployment health check
+├── database/                 # Database scripts
+│   ├── init_db.sql                   # Database initialization
+│   ├── migrations/                   # Database migrations
+│   │   ├── 001_initial_schema.sql            # Initial schema migration
+│   │   └── 002_add_insights_table.sql        # Example schema update
+│   ├── backup.sh                     # Database backup script
+│   └── restore.sh                    # Database restore script
+├── maintenance/              # Maintenance scripts
+│   ├── cleanup_old_data.py           # Data cleanup script
+│   ├── prune_logs.sh                 # Log pruning script
+│   └── health_check.py               # System health check
+├── testing/                  # Testing scripts
+│   ├── load_test.py                  # Load testing script
+│   ├── test_fixtures.py              # Test fixture generation
+│   └── mock_data_generator.py        # Mock data generator
+└── setup/                    # Setup scripts
+    ├── install_dependencies.sh       # Dependency installation
+    ├── setup_environment.sh          # Environment setup
+    └── initial_config.py             # Initial configuration
+File Descriptions:
+
+scripts/deployment/deploy.sh: Automates application deployment
+scripts/deployment/rollback.sh: Rolls back to previous version
+scripts/deployment/healthcheck.sh: Checks deployment health
+scripts/database/init_db.sql: Initializes database schema
+scripts/database/migrations/*: Database schema migrations
+scripts/database/backup.sh: Backs up database
+scripts/database/restore.sh: Restores database from backup
+scripts/maintenance/cleanup_old_data.py: Removes old data
+scripts/maintenance/prune_logs.sh: Archives and removes old logs
+scripts/maintenance/health_check.py: Checks system health
+scripts/testing/load_test.py: Tests system under load
+scripts/testing/test_fixtures.py: Generates test fixtures
+scripts/testing/mock_data_generator.py: Generates mock data
+scripts/setup/install_dependencies.sh: Installs required dependencies
+scripts/setup/setup_environment.sh: Sets up environment
+scripts/setup/initial_config.py: Creates initial configuration
+
+Key Files and Their Responsibilities
+Critical System Files
+
+core/engine.py
+
+Purpose: Main orchestrator for the analytics engine
+Responsibilities:
+
+Initialize and coordinate all analysis components
+Manage the analysis workflow
+Handle error recovery and logging
+Coordinate between data, analysis, and insight components
+
+
+
+
+data/connectors/mixpanel_connector.py
+
+Purpose: Connection to Mixpanel API
+Responsibilities:
+
+Authenticate with Mixpanel API
+Handle rate limiting and retries
+Query and retrieve event data
+Transform responses into internal data formats
+
+
+
+
+insights/insights_engine.py
+
+Purpose: Manages insight generation process
+Responsibilities:
+
+Coordinate insight generators
+Prioritize and filter insights
+Generate recommendations based on insights
+Format insights for delivery
+
+
+
+
+workers/worker.py
+
+Purpose: Background processing worker entry point
+Responsibilities:
+
+Initialize worker processes
+Connect to task queue
+Process scheduled and queued tasks
+Report worker status and health
+
+
+
+
+api/server.py
+
+Purpose: API server entry point
+Responsibilities:
+
+Initialize API endpoints
+Handle authentication and authorization
+Route requests to appropriate controllers
+Handle errors and responses
+
+
+
+
+
+Data Processing Pipeline Files
+
+data/processing/event_processing.py
+
+Purpose: Process raw event data from Mixpanel
+Responsibilities:
+
+Parse event data
+Filter and clean events
+Group and aggregate events
+Prepare events for storage and analysis
+
+
+
+
+core/metrics/engagement_metrics.py
+
+Purpose: Calculate user engagement metrics
+Responsibilities:
+
+Process user session data
+Calculate session frequency, duration
+Track feature usage metrics
+Generate engagement scores
+
+
+
+
+core/analysis/funnel_analysis.py
+
+Purpose: Analyze user conversion funnels
+Responsibilities:
+
+Track user progress through funnels
+Calculate conversion rates between steps
+Identify drop-off points
+Compare funnel performance over time
+
+
+
+
+core/analysis/segmentation.py
+
+Purpose: Create user segments based on behavior
+Responsibilities:
+
+Cluster users by behavior patterns
+Create segment definitions
+Track segment sizes over time
+Identify high-value segments
+
+
+
+
+insights/generators/opportunity_generator.py
+
+Purpose: Generate growth opportunity insights
+Responsibilities:
+
+Identify areas with potential for improvement
+Calculate potential impact of opportunities
+Generate actionable recommendations
+Format insights for presentation
+
+
+
+
+
+User Interface Files
+
+ui/dashboard/overview/insights_panel.jsx
+
+Purpose: Display AI-generated insights
+Responsibilities:
+
+Fetch insights from API
+Render insights in a readable format
+Filter and sort insights
+Allow interaction with insights
+
+
+
+
+ui/shared/charts/funnel_chart.jsx
+
+Purpose: Visualize conversion funnels
+Responsibilities:
+
+Render funnel visualization
+Display conversion rates
+Highlight drop-off points
+Support interactive exploration
+
+
+
+
+ui/context/analytics_context.js
+
+Purpose: Provide analytics data to UI components
+Responsibilities:
+
+Fetch and cache analytics data
+Update data on interval
+Provide data access methods
+Handle loading and error states
+
+
+
+
+ui/hooks/use_insights.js
+
+Purpose: Provide insights data to components
+Responsibilities:
+
+Fetch insights from API
+Filter and sort insights
+Track viewed and actioned insights
+Cache insights for performance
+
+
+
+
+ui/pages/dashboard_page.jsx
+
+Purpose: Main dashboard page
+Responsibilities:
+
+Lay out dashboard components
+Manage dashboard state
+Handle user interactions
+Coordinate between components
+
+
+
+
+
+Conclusion
+This detailed file structure provides a comprehensive architecture for the HitCraft AI Analytics Engine. Each file has a clear purpose and responsibility, organized in a modular fashion to allow for maintainability and scalability. The architecture separates concerns into distinct layers (API, data, core analysis, insights, UI) while providing integration points between them.
+The system is designed to be extensible, allowing for the addition of new metrics, analysis techniques, insight types, and visualizations as the product evolves. The worker-based background processing system ensures that resource-intensive tasks do not impact user experience, while the API layer provides a clean interface for the UI and potential third-party integrations.
